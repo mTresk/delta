@@ -28,8 +28,8 @@ FILE_MATCH=omni-*.zip
 PATH_CURRENT=$HOME/out/target/product/$DEVICE
 PATH_LAST=$HOME/delta/last/$DEVICE
 
-KEY_X509=$HOME/.keys/platform.x509.pem
-KEY_PK8=$HOME/.keys/platform.pk8
+KEY_X509=/home/tresk/build/build/target/product/security/platform.x509.pem
+KEY_PK8=/home/tresk/build/build/target/product/security/platform.pk8
 
 # ------ PROCESS ------
 
@@ -100,10 +100,10 @@ if [ $? -ne 0 ]; then
 	echo "Abort: creating signing info for last failed" >&2
 	exit 1
 fi
-SRC_BUFF=$(nextPowerOf2 $(getFileSize work/current.zip));
-$BIN_XDELTA -B ${SRC_BUFF} -9evfS none -s work/last.zip work/current.zip out/$FILE_LAST_BASE.update
-SRC_BUFF=$(nextPowerOf2 $(getFileSize work/current_signed.zip));
-$BIN_XDELTA -B ${SRC_BUFF} -9evfS none -s work/current.zip work/current_signed.zip out/$FILE_LAST_BASE.sign
+SRC_BUFF=$(nextPowerOf2 $(getFileSize work/current.zip)); 
+$BIN_XDELTA -9evfS none -s work/last.zip work/current.zip out/$FILE_LAST_BASE.update
+SRC_BUFF=$(nextPowerOf2 $(getFileSize work/current_signed.zip)); 
+$BIN_XDELTA -9evfS none -s work/current.zip work/current_signed.zip out/$FILE_LAST_BASE.sign
 
 MD5_CURRENT=$(getFileMD5 $PATH_CURRENT/$FILE_CURRENT)
 MD5_CURRENT_STORE=$(getFileMD5 work/current.zip)

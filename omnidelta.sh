@@ -13,7 +13,7 @@ if [ "$SSHUSER" == "" ]; then
 fi
 
 HOME=/home/tresk/build
-SSHHOST=91.121.79.102
+SSHHOST=148.251.67.94
 SSHPORT=22
 KEYFILE=/home/tresk/.ssh/common
 SAVE_PATH=$PWD
